@@ -16,7 +16,7 @@ settings=$base/settings.json
 rootset=$base/rootsettings.json
 old=/ebrmain/config/settings/settings.json
 
-function remove_bind() {
+remove_bind() {
 	umount -l /usr/share/terminfo
 	umount -l /ebrmain/bin/netagent
 	umount -l /var/tmp/netagent.orig
@@ -26,18 +26,18 @@ function remove_bind() {
 }
 
 bk=/var/tmp/backup_etc
-function backup_config() {
+backup_config() {
 	mkdir /var/tmp/backup_etc
 	cp -af /mnt/secure/etc/firewall $bk
 	cp -af /mnt/secure/etc/*passwd $bk
 	cp -af /mnt/secure/etc/*.conf $bk
 }
-function restore_config() {
+restore_config() {
 	cp -af $bk/* /mnt/secure/etc/
 }
 
 
-function uninstall() {
+uninstall() {
 	remove_bind
 	chattr -i /mnt/secure/runonce/*.sh
 	rm -rf /mnt/secure/runonce/*.sh /mnt/secure/bin /mnt/secure/etc /mnt/secure/lib /mnt/secure/.pkgver
